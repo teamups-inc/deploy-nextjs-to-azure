@@ -1,8 +1,15 @@
+import client from "@/lib/mongodb";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "next/font/google";
-import client from "@/lib/mongodb";
-import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import { useEffect, useState } from "react";
+
+interface IRestaurant {
+  _id: string;
+  name: string;
+  cuisine: string;
+}
 
 type ConnectionStatus = {
   isConnected: boolean;
@@ -29,6 +36,15 @@ export const getServerSideProps: GetServerSideProps<
 export default function Home({
   isConnected,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
+  useEffect(() => {
+    (async () => {
+      const results = await fetch("/api/list");
+      const resultsJson = await results.json();
+      setRestaurants(resultsJson);
+    })();
+  }, []);
+  console.log(restaurants);
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
