@@ -1,5 +1,7 @@
 # Guided walkthrough for deploying NextJS to Azure
 
+![deploy-to-azure](https://github.com/user-attachments/assets/f45bb4c3-ed91-442e-9616-7a16f91cf17a)
+
 ## Intro
 
 This repository includes a full walkthrough for deploying NextJS to Azure, whether you are migrating from Vercel or deploying for the first time.
